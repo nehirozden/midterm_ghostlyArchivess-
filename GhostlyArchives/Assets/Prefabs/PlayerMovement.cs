@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     {
         // Horizontal movement with A and D keys
         float moveInput = 0f;
-        
+
         if (Input.GetKey(KeyCode.A))
         {
             moveInput = -1f;
@@ -27,14 +27,20 @@ public class PlayerController : MonoBehaviour
             moveInput = 1f;
         }
 
-        rb.velocity = new Vector2(moveInput * speed, rb.velocity.y);
+        // Set horizontal velocity only when there is input
+        if (moveInput != 0)
+        {
+            rb.velocity = new Vector2(moveInput * speed, rb.velocity.y);
+        }
 
         // Jumping
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
+            // Preserve the current horizontal velocity when jumping
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         }
     }
+
 
 
     // Check if the player is on the ground

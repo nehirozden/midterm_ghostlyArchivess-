@@ -3,7 +3,7 @@ using UnityEngine;
 public class BookController : MonoBehaviour
 {
     public GameObject player;  // Reference to the player object
-    public float acceleration = 10.0f;  // Acceleration of the book's speed
+    public float acceleration = 20.0f;  // Acceleration of the book's speed
     public float launchForce = 10.0f;   // Force applied when launching
     public float launchDistanceThreshold = 2.0f; // Distance to launch
 
@@ -44,7 +44,7 @@ public class BookController : MonoBehaviour
             {
                 // Stop moving when the 'P' key is released
                 isMoving = false;
-                rb.velocity = Vector2.zero;  // Stop the book's movement
+                //rb.velocity = Vector2.zero;  // Stop the book's movement
                 speed = 0f;  // Reset the speed
             }
         }
@@ -83,4 +83,5 @@ public class BookController : MonoBehaviour
         // Optionally, reset isMoving if you want to stop the book from moving after launching
         isMoving = false;
     }
+
 }
