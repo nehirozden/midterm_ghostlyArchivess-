@@ -7,6 +7,7 @@ public class BookController : MonoBehaviour
     public float launchForce = 10.0f;   // Force applied when launching
     public float launchDistanceThreshold = 2.0f; // Distance to launch
 
+
     private Rigidbody2D rb;
     private Collider2D playerCollider; // Player's collider
     private Collider2D bookCollider;   // Book's collider
