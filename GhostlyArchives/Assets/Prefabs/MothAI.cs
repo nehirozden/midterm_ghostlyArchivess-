@@ -11,13 +11,19 @@ public class MothAI : MonoBehaviour
     private Rigidbody2D rb;
 
     public GameObject player;
+    public GameObject mothPrefab; // Reference to the Moth prefab
 
     private Collider2D playerCollider;  // Player's collider
     private Collider2D bookCollider;    // Book's collider
+    private Collider2D mothCollider;    // Moth's collider
 
-    // Start is called before the first frame update
+
+    public float requiredVelocity = 6f; // Velocity needed to kill the moth
+
     void Start()
     {
+
+        InvokeRepeating("DuplicateMoth", 10f, 20f);
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>(); 
 
 
@@ -25,10 +31,10 @@ public class MothAI : MonoBehaviour
 
         // Get the colliders of the book and the player
         playerCollider = player.GetComponent<Collider2D>();
-        bookCollider = GetComponent<Collider2D>();
+        mothCollider = GetComponent<Collider2D>();
 
-        // Ignore collision between the book and the player
-        Physics2D.IgnoreCollision(bookCollider, playerCollider);
+        // Ignore collision between the moth and the player
+        Physics2D.IgnoreCollision(mothCollider, playerCollider);
     }
 
     // Update is called once per frame
@@ -38,5 +44,30 @@ public class MothAI : MonoBehaviour
             transform.position = Vector2.MoveTowards(transform.position, target.position, Speed * Time.deltaTime);
         }
 
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        // Check if the object we collided with has the "Book" tag
+        if (collision.gameObject.CompareTag("Book"))
+        {
+            // Get the velocity of the book's Rigidbody2D
+            Rigidbody2D bookRb = collision.gameObject.GetComponent<Rigidbody2D>();
+
+            if (bookRb != null)
+            {
+                // Check if the book's velocity is greater than the required velocity
+                if (bookRb.velocity.magnitude >= requiredVelocity)
+                {
+                    // Destroy the moth if the book is fast enough
+                    Destroy(gameObject);
+                    Debug.Log("Moth destroyed by the book!");
+                }
+                else {
+                    Debug.Log("Not fast enough!");
+
+                }
+            }
+        }
     }
 }

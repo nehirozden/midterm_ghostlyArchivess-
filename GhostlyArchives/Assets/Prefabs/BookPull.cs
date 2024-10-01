@@ -29,11 +29,23 @@ public class BookController : MonoBehaviour
     void Update()
     {
         // Check if 'P' is being held down
-        if (Input.GetKey(KeyCode.P))
+        if (Input.GetKey(KeyCode.Mouse1))
         {
-            isMoving = true;
+            if (Vector2.Distance(transform.position, player.transform.position) <= launchDistanceThreshold)
+            {
+                transform.position = player.transform.position;
+            }
+            else {
+                // Move the book if m1 is held down
+                if (isMoving)
+                {
+                    MoveTowardsPlayer();
+                }
+                isMoving = true;
+
+            }
         }
-        else if (Input.GetKeyUp(KeyCode.P))
+        else if (Input.GetKeyUp(KeyCode.Mouse1))
         {
             // Check the distance to the player
             if (Vector2.Distance(transform.position, player.transform.position) <= launchDistanceThreshold)
@@ -43,17 +55,10 @@ public class BookController : MonoBehaviour
             }
             else
             {
-                // Stop moving when the 'P' key is released
+                // Stop moving when the m1 key is released
                 isMoving = false;
-                //rb.velocity = Vector2.zero;  // Stop the book's movement
                 speed = 0f;  // Reset the speed
             }
-        }
-
-        // Move the book if 'P' is held down
-        if (isMoving)
-        {
-            MoveTowardsPlayer();
         }
     }
 
@@ -73,15 +78,13 @@ public class BookController : MonoBehaviour
     {
         // Get the mouse position in world space
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mousePosition.z = 0; // Set z to 0 since we're working in 2D
+        mousePosition.z = 0;
 
         // Calculate the direction to the mouse
         Vector2 launchDirection = (mousePosition - transform.position).normalized;
 
         // Apply a force in the launch direction
         rb.velocity = launchDirection * launchForce;
-
-        // Optionally, reset isMoving if you want to stop the book from moving after launching
         isMoving = false;
     }
 
