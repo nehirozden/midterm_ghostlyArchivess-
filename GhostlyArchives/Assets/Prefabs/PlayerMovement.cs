@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        Physics.SyncTransforms();
         // Horizontal movement with A and D keys
         float moveInput = 0f;
 
