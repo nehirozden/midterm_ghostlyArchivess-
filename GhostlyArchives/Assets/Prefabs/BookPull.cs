@@ -129,4 +129,9 @@ public class BookController : MonoBehaviour
             isSelected = true;
         }
     }
+
+    // For the bookshelf to set selected
+    public void bookshelfSelect() {
+        isSelected = true;
+    }
 }
