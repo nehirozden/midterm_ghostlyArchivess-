@@ -18,12 +18,11 @@ public class MothAI : MonoBehaviour
     private Collider2D mothCollider;    // Moth's collider
 
 
-    public float requiredVelocity = 6f; // Velocity needed to kill the moth
+    public float requiredVelocity = 10f; // Velocity needed to kill the moth
 
     void Start()
     {
-
-        InvokeRepeating("DuplicateMoth", 10f, 20f);
+        requiredVelocity = 10f;
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>(); 
 
 
@@ -46,10 +45,10 @@ public class MothAI : MonoBehaviour
 
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         // Check if the object we collided with has the "Book" tag
-        if (collision.gameObject.CompareTag("Book"))
+        if (collision.CompareTag("Book"))
         {
             // Get the velocity of the book's Rigidbody2D
             Rigidbody2D bookRb = collision.gameObject.GetComponent<Rigidbody2D>();
@@ -59,6 +58,7 @@ public class MothAI : MonoBehaviour
                 // Check if the book's velocity is greater than the required velocity
                 if (bookRb.velocity.magnitude >= requiredVelocity)
                 {
+                    Debug.Log(bookRb.velocity.magnitude);
                     // Destroy the moth if the book is fast enough
                     Destroy(gameObject);
                     Debug.Log("Moth destroyed by the book!");

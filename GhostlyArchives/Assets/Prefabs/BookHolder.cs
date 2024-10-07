@@ -4,13 +4,30 @@ using UnityEngine;
 
 public class SelectBook : MonoBehaviour
 {
-    private bool hasBook = true;  // To store the book reference
+    private bool hasBook = false;  // To store the book reference
     private bool isSelected = false;  // To check if the bookshelf is selected
+
+    // Code for managing the sprites
+    public SpriteRenderer spriteRenderer;
+    public Sprite full_bookshelf;
+    public Sprite empty_bookshelf;
 
     public GameObject bookPrefab; // Prefab of the book to spawn
 
+    void Start() {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        if (hasBook) {
+            spriteRenderer.sprite = full_bookshelf;
+        }
+        else {
+            spriteRenderer.sprite = empty_bookshelf;
+        }
+    }
+
     void Update()
     {
+
+        // Selection script
         if (Input.GetKey(KeyCode.Mouse0)) {
             if (isSelected) {
                 Debug.Log("deselected");
@@ -24,6 +41,7 @@ public class SelectBook : MonoBehaviour
         }
     }
 
+
     // Detect when a book collides with the bookshelf
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -31,28 +49,28 @@ public class SelectBook : MonoBehaviour
         {
             if (!hasBook) {
                 hasBook = true;
+                spriteRenderer.sprite = full_bookshelf;
+
                 // Destroy the book from the scene
                 Destroy(other.gameObject);
-
-                Debug.Log("Book stored in the bookshelf");
             }
         }
     }
 
-    // This function handles selection when the bookshelf is clicked
+    // Deselecting
     private void OnMouseUpAsButton()
     {
         // Toggle selection state when the bookshelf is clicked
         isSelected = !isSelected;
 
-        if (isSelected)
-        {
-            Debug.Log("Bookshelf selected. Press 'Q' to spawn the book.");
-        }
-        else
-        {
-            Debug.Log("Bookshelf deselected.");
-        }
+        // if (isSelected)
+        // {
+        //     Debug.Log("Bookshelf selected. Press 'Q' to spawn the book.");
+        // }
+        // else
+        // {
+        //     Debug.Log("Bookshelf deselected.");
+        // }
     }
 
     // Spawn the book from the bookshelf
@@ -69,16 +87,15 @@ public class SelectBook : MonoBehaviour
             bookController.bookshelfSelect();
 
             isSelected = false;
-            Debug.Log("Book spawned from bookshelf");            
 
             hasBook = false;
+            spriteRenderer.sprite = empty_bookshelf;
         }
     }
 
+    // Select
     void OnMouseOver() {
         if (Input.GetMouseButtonUp(0)){
-            Debug.Log("shelf selected");
-
             isSelected = true;
         }
     }

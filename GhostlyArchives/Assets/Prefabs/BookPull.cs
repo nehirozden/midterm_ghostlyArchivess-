@@ -49,16 +49,12 @@ public class BookController : MonoBehaviour
             if (isSelected) {
                 if (Vector2.Distance(transform.position, player.transform.position) <= launchDistanceThreshold)
                 {
-                    Debug.Log("Close to player");
-
                     transform.position = player.transform.position;
                 }
                 else {
                     // Move the book if m1 is held down
                     if (isMoving)
                     {
-                        Debug.Log("Moving towards player update");
-
                         MoveTowardsPlayer();
                     }
                     isMoving = true;
@@ -91,7 +87,6 @@ public class BookController : MonoBehaviour
 
     void MoveTowardsPlayer()
     {
-        Debug.Log("Moving towards player");
         // Calculate the direction from the book to the player
         Vector2 direction = (player.transform.position - transform.position).normalized;
 
@@ -105,8 +100,6 @@ public class BookController : MonoBehaviour
 
     void LaunchTowardsMouse()
     {
-        Debug.Log("Launching towards mouse");
-
         // Get the mouse position in world space
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePosition.z = 0;
@@ -119,13 +112,8 @@ public class BookController : MonoBehaviour
         isMoving = false;
     }
     
-    void OnMouseOver() {
-        
+    void OnMouseOver() {     
         if (Input.GetMouseButtonUp(0)){
-            Debug.Log(player.transform.position);
-
-            Debug.Log("selected");
-
             isSelected = true;
         }
     }
