@@ -5,9 +5,9 @@ using UnityEngine;
 public class MothAI : MonoBehaviour
 {
 
-    public float Speed; private
-    Transform target; public
-    float StopChase;
+    public float Speed = 3f;
+    private Transform target;
+    public float StopChase;
     private Rigidbody2D rb;
 
     public GameObject player;
@@ -22,9 +22,7 @@ public class MothAI : MonoBehaviour
 
     void Start()
     {
-        requiredVelocity = 10f;
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>(); 
-
 
         rb = GetComponent<Rigidbody2D>();
 

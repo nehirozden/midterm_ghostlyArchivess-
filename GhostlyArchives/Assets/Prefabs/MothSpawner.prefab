@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6682948363221283977
 MonoBehaviour:
@@ -44,4 +44,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c5fcdd9b46c7274daaf7e9f46ef411d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mothPrefab: {fileID: 377564802414699596, guid: 64a7c6ff3045a7d4ab746604687795c0, type: 3}
+  bigMothPrefab: {fileID: 377564802414699596, guid: 64a7c6ff3045a7d4ab746604687795c0, type: 3}
+  smallMothPrefab: {fileID: 377564802414699596, guid: 63ecd409f096d3a4ba75b4a278b31088, type: 3}
+  timeBetweenSpawnBig: 6
+  timeBetweenSpawnSmall: 11
+  bigSpawnStartTime: 0
+  smallSpawnStartTime: 5
+  bigSpawnDecrement: 2
+  smallSpawnDecrement: 3
+  bigSpawnDecrementTime: 40
+  smallSpawnDecrementTime: 45
+  spawnCap: 2
