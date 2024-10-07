@@ -35,7 +35,7 @@ public class BookController : MonoBehaviour
     {
         // Selection code 
       
-        if (Input.GetKey(KeyCode.Mouse0)) {
+        if (Input.GetButtonDown("Select")) {
             if (isSelected) {
                 Debug.Log("deselected");
                 isSelected = false;
@@ -44,7 +44,7 @@ public class BookController : MonoBehaviour
 
 
         // Check if M1 is being held down
-        if (Input.GetKey(KeyCode.Mouse1) || Input.GetKey(KeyCode.Q))
+        if (Input.GetButton("Pull"))
         {
             if (isSelected) {
                 if (Vector2.Distance(transform.position, player.transform.position) <= launchDistanceThreshold)
@@ -68,7 +68,7 @@ public class BookController : MonoBehaviour
         }
 
         // Release the key
-        else if (Input.GetKeyUp(KeyCode.Mouse1) || Input.GetKeyUp(KeyCode.Q))
+        else if (Input.GetButtonUp("Pull"))
         {
             if (isSelected) {
 
@@ -113,7 +113,7 @@ public class BookController : MonoBehaviour
     }
     
     void OnMouseOver() {     
-        if (Input.GetMouseButtonUp(0)){
+        if (Input.GetButtonUp("Select")){
             isSelected = true;
         }
     }

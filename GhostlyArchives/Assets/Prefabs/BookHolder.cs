@@ -28,14 +28,14 @@ public class SelectBook : MonoBehaviour
     {
 
         // Selection script
-        if (Input.GetKey(KeyCode.Mouse0)) {
+        if (Input.GetButtonDown("Select")) {
             if (isSelected) {
                 Debug.Log("deselected");
                 isSelected = false;
             }
         }
         // Check if the bookshelf is selected
-        if (isSelected && Input.GetKeyDown(KeyCode.Q))
+        if (isSelected && Input.GetButtonDown("Pull"))
         {
             SpawnBook();
         }
@@ -95,7 +95,7 @@ public class SelectBook : MonoBehaviour
 
     // Select
     void OnMouseOver() {
-        if (Input.GetMouseButtonUp(0)){
+        if (Input.GetButtonUp("Select")){
             isSelected = true;
         }
     }

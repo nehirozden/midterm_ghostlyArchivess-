@@ -19,11 +19,11 @@ public class PlayerController : MonoBehaviour
         // Horizontal movement with A and D keys
         float moveInput = 0f;
 
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetButton("Left"))
         {
             moveInput = -1f;
         }
-        else if (Input.GetKey(KeyCode.D))
+        else if (Input.GetButton("Right"))
         {
             moveInput = 1f;
         }
@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // Jumping
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        if (Input.GetButton("Jump") && isGrounded)
         {
             // Preserve the current horizontal velocity when jumping
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
