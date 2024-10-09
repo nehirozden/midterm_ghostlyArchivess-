@@ -5,6 +5,7 @@ public class PlayerController : MonoBehaviour
     public float speed = 5f;  // Movement speed
     public float jumpForce = 10f;  // Jump force
     private bool isGrounded;
+    public float health = 4f;
 
     private Rigidbody2D rb;
 
@@ -60,4 +61,13 @@ public class PlayerController : MonoBehaviour
             isGrounded = false;
         }
     }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Enemy")) {
+            health -= 0.5f;
+            Destroy(collision.gameObject);
+        }
+    }
 }
+
