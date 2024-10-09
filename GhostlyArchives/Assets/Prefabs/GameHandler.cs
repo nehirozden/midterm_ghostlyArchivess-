@@ -9,19 +9,28 @@ public class GameHandler : MonoBehaviour {
     public GameObject healthText;
     public PlayerController currHealth;
 
+    public string[] levels;
+    public string[] transitions;
+    private int curr_level;
+    private GameObject[] shelves;
+
+    
+    void Start() {
+        levels = new string[] {"Level1", "Level2", "Level3"};
+        transitions = new string[] {"Transition1", "Transition2"};
+    }
+ 
     // Method to start the game (load the start scene)
     public void StartScene(){
+        curr_level = 0;
         // As in, when the start button is clicked, this scene is loaded
-        SceneManager.LoadScene("KevinScene"); // Change this to your start scene name
-        Debug.Log("in start");
-        updateStatsDisplay();
-        Debug.Log("after display");
+        SceneManager.LoadScene(levels[0]); // Change this to your start scene name
     }
 
     // Method to restart the game
     public void RestartGame(){
         // As in, when the restart button is clicked, this scene is loaded
-        SceneManager.LoadScene("KevinScene"); // Change this to the scene you want to restart
+        SceneManager.LoadScene(levels[curr_level]);
     }
 
     // Method to quit the game
@@ -35,14 +44,52 @@ public class GameHandler : MonoBehaviour {
 
     // Update is called once per frame
     void Update(){
-        updateStatsDisplay();
+        Debug.Log(curr_level);
+
+        // Add health if in a level
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        for (int i = 0; i < levels.Length; i++)
+        {
+            if (currentSceneName == levels[i])
+            {
+                curr_level = i;
+                updateStatsDisplay();
+                if (checkIfComplete()) {
+                    load_next();
+                }
+            }
+        }
+        
         // Checks if the Escape key is pressed
         if (Input.GetKeyDown(KeyCode.Escape)){
             QuitGame(); // Call the QuitGame function when Escape is pressed
         }
     }
 
+    // Checks level completion
+    bool checkIfComplete() {
+        shelves = GameObject.FindGameObjectsWithTag("Bookshelf");
+        foreach (GameObject shelf in shelves) {
+            SelectBook shelf_script = shelf.GetComponent<SelectBook>();
+            if (shelf_script == null || !shelf_script.hasBook) {
+                return false;
+            }
+        }
+        return true;
+    }    
+
+    public void load_next() {
+        if (curr_level < levels.Length - 1) {
+            curr_level++;
+            SceneManager.LoadScene(transitions[curr_level - 1]);
+        }
+        else {
+            SceneManager.LoadScene("FinalScene");
+        }
+    }
+
     public void updateStatsDisplay(){
+        currHealth = GameObject.FindGameObjectsWithTag("Player")[0].GetComponent<PlayerController>();
         Debug.Log("here");
         Text healthTextTemp = healthText.GetComponent<Text>();
         // currHealth = GetComponent<PlayerController>();

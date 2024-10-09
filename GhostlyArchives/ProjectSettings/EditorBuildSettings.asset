@@ -9,8 +9,23 @@ EditorBuildSettings:
     path: Assets/Scenes/StartScene.unity
     guid: 4cc7f715a595a404e931b5bd21abd90e
   - enabled: 1
-    path: Assets/Scenes/KevinScene.unity
-    guid: adef1594188c1af4287a334d1a498650
+    path: Assets/Scenes/Level1.unity
+    guid: 8f89e868801299d459e78678da42bded
+  - enabled: 1
+    path: Assets/Scenes/Transition1.unity
+    guid: a119bf09b79efd048a697c600d255143
+  - enabled: 1
+    path: Assets/Scenes/Level2.unity
+    guid: 5d7f9d40a2d663c49b032b29b721001f
+  - enabled: 1
+    path: Assets/Scenes/Transition2.unity
+    guid: f51da5b3b4324b749a881bb1f5c96c79
+  - enabled: 1
+    path: Assets/Scenes/Level3.unity
+    guid: 7551b879618d06f49a04cc4ffd45cf23
+  - enabled: 1
+    path: Assets/Scenes/FinalScene.unity
+    guid: 853f3320e2dcd874591a6a9d1410c84f
   - enabled: 1
     path: Assets/Scenes/EndScene.unity
     guid: 177a235eec46d48f2a74cb6c210f0d26

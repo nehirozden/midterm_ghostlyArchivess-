@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SelectBook : MonoBehaviour
 {
-    private bool hasBook = false;  // To store the book reference
+    public bool hasBook = false;  // To store the book reference
     private bool isSelected = false;  // To check if the bookshelf is selected
 
     // Code for managing the sprites
