@@ -8,10 +8,12 @@ public class PlayerController : MonoBehaviour
     public float health = 4f;
 
     private Rigidbody2D rb;
+    private Animator animator = null;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     void Update()
@@ -20,13 +22,16 @@ public class PlayerController : MonoBehaviour
         // Horizontal movement with A and D keys
         float moveInput = 0f;
 
+
         if (Input.GetButton("Left"))
         {
             moveInput = -1f;
+            animator.SetBool("is_Idle", false);
         }
         else if (Input.GetButton("Right"))
         {
             moveInput = 1f;
+            animator.SetBool("is_Idle", false);
         }
 
         // Set horizontal velocity only when there is input
@@ -40,6 +45,16 @@ public class PlayerController : MonoBehaviour
         {
             // Preserve the current horizontal velocity when jumping
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            animator.SetBool("is_Idle", false);
+        }
+
+        if (moveInput == 0 && isGrounded)
+        {
+            animator.SetBool("is_Idle", true);  // Enable idle animation when not moving and grounded
+        }
+        else
+        {
+            animator.SetBool("is_Idle", false);  // Ensure idle animation is disabled when moving or in the air
         }
     }
 
