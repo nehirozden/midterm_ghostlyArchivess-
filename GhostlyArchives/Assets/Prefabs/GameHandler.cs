@@ -18,17 +18,28 @@ public class GameHandler : MonoBehaviour {
     void Start() {
         levels = new string[] {"Level1", "Level2", "Level3"};
         transitions = new string[] {"Transition1", "Transition2"};
+
+        // In order to store the last level the player was at before dying
+        curr_level = PlayerPrefs.GetInt("currentLevel", 0);
     }
  
     // Method to start the game (load the start scene)
     public void StartScene(){
         curr_level = 0;
+
+        curr_level = PlayerPrefs.GetInt("currentLevel", curr_level);
         // As in, when the start button is clicked, this scene is loaded
         SceneManager.LoadScene(levels[0]); // Change this to your start scene name
     }
 
+    public void GameOverScene(){
+        curr_level = PlayerPrefs.GetInt("currentLevel", curr_level);
+        SceneManager.LoadScene("EndScene");
+    }
+
     // Method to restart the game
     public void RestartGame(){
+        curr_level = PlayerPrefs.GetInt("currentLevel");
         // As in, when the restart button is clicked, this scene is loaded
         SceneManager.LoadScene(levels[curr_level]);
     }
@@ -44,8 +55,6 @@ public class GameHandler : MonoBehaviour {
 
     // Update is called once per frame
     void Update(){
-        Debug.Log(curr_level);
-
         // Add health if in a level
         string currentSceneName = SceneManager.GetActiveScene().name;
         for (int i = 0; i < levels.Length; i++)
@@ -54,6 +63,9 @@ public class GameHandler : MonoBehaviour {
             {
                 curr_level = i;
                 updateStatsDisplay();
+                // Saving the current level
+                PlayerPrefs.SetInt("currentLevel", curr_level);
+
                 if (checkIfComplete()) {
                     load_next();
                 }
@@ -81,6 +93,7 @@ public class GameHandler : MonoBehaviour {
     public void load_next() {
         if (curr_level < levels.Length - 1) {
             curr_level++;
+            PlayerPrefs.SetInt("currentLevel", curr_level);
             SceneManager.LoadScene(transitions[curr_level - 1]);
         }
         else {
@@ -90,15 +103,15 @@ public class GameHandler : MonoBehaviour {
 
     public void updateStatsDisplay(){
         currHealth = GameObject.FindGameObjectsWithTag("Player")[0].GetComponent<PlayerController>();
-        Debug.Log("here");
         Text healthTextTemp = healthText.GetComponent<Text>();
-        // currHealth = GetComponent<PlayerController>();
-        Debug.Log("after");
 
-
-        healthTextTemp.text = "HEALTH: " + currHealth.health;
-        Debug.Log(currHealth.health);
+        if (currHealth.health == 0) {
+            GameOverScene();
+        } else {
+            healthTextTemp.text = "HEALTH: " + currHealth.health;
+        }
     }
 
 
 }
+
