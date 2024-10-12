@@ -7,7 +7,8 @@ public class BookController : MonoBehaviour
 
     public GameObject player;  // Reference to the player object
     public float acceleration = 20.0f;  // Acceleration of the book's speed
-    public float launchForce = 10.0f;   // Force applied when launching
+    public float launchForce = 7.0f;   // Force applied when launching
+    public float oomph = 0.5f; // Force added by player
     public float launchDistanceThreshold = 2.0f; // Distance to launch
 
 
@@ -15,7 +16,7 @@ public class BookController : MonoBehaviour
     private Collider2D playerCollider; // Player's collider
     private Collider2D bookCollider;   // Book's collider
     private float speed = 0f;  // Initial speed
-    private bool isMoving = false;
+    public bool isMoving = false;
 
     void Start()
     {
@@ -100,15 +101,20 @@ public class BookController : MonoBehaviour
 
     void LaunchTowardsMouse()
     {
-        // Get the mouse position in world space
+        // Get mouse position
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePosition.z = 0;
+        Vector2 directionToMouse = (mousePosition - transform.position).normalized;
+        directionToMouse = directionToMouse.normalized;
 
-        // Calculate the direction to the mouse
-        Vector2 launchDirection = (mousePosition - transform.position).normalized;
 
-        // Apply a force in the launch direction
-        rb.velocity = launchDirection * launchForce;
+        // Get current player velocity
+        Vector2 playerVelo = player.GetComponent<Rigidbody2D>().velocity;
+        float velocityInMouseDirection = Vector2.Dot(playerVelo, directionToMouse);
+
+        // Apply the launch force 
+        rb.velocity = directionToMouse * (launchForce + velocityInMouseDirection * oomph); 
+
         isMoving = false;
     }
     

@@ -47,7 +47,8 @@ public class SelectBook : MonoBehaviour
     {
         if (other.CompareTag("Book"))
         {
-            if (!hasBook) {
+            Debug.Log(other.GetComponent<BookController>().isMoving);
+            if (!hasBook && !other.GetComponent<BookController>().isMoving) {
                 hasBook = true;
                 spriteRenderer.sprite = full_bookshelf;
 

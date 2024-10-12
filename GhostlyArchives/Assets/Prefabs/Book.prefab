@@ -51,7 +51,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 9ab3daca53b2e664a986e5af93fd5ab6, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -77,7 +77,8 @@ MonoBehaviour:
   isSelected: 0
   player: {fileID: 4203547496114318787, guid: 9795d04a5b1ba674bb879f888d933e85, type: 3}
   acceleration: 20
-  launchForce: 10
+  launchForce: 8
+  oomph: 0.8
   launchDistanceThreshold: 2
 --- !u!61 &2394017314771327740
 BoxCollider2D:
