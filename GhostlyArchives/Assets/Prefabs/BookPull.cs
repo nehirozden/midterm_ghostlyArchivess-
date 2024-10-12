@@ -9,7 +9,7 @@ public class BookController : MonoBehaviour
     public float acceleration = 20.0f;  // Acceleration of the book's speed
     public float launchForce = 7.0f;   // Force applied when launching
     public float oomph = 0.5f; // Force added by player
-    public float launchDistanceThreshold = 2.0f; // Distance to launch
+    public float launchDistanceThreshold = 1.0f; // Distance to launch
 
 
     private Rigidbody2D rb;
@@ -18,9 +18,12 @@ public class BookController : MonoBehaviour
     private float speed = 0f;  // Initial speed
     public bool isMoving = false;
 
+    private bool isCollidingWithGround = false;
+
     void Start()
     {
         player = GameObject.FindWithTag("Player");
+        isCollidingWithGround = false;
 
         rb = GetComponent<Rigidbody2D>();
 
@@ -86,13 +89,34 @@ public class BookController : MonoBehaviour
         }
     }
 
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        // Check if the colliding object has the "Ground" tag
+        if (isMoving && collision.gameObject.CompareTag("Ground"))
+        {
+            isCollidingWithGround = true; // Set flag to true when colliding with ground
+        }
+    }
+
+    void OnCollisionExit2D(Collision2D collision)
+    {
+        // Reset the flag when no longer colliding with the ground
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isCollidingWithGround = false; // Set flag to false when exiting collision with ground
+        }
+    }
+
     void MoveTowardsPlayer()
     {
         // Calculate the direction from the book to the player
         Vector2 direction = (player.transform.position - transform.position).normalized;
-
+    
         // Increase the speed over time
-        speed += acceleration * Time.deltaTime;
+
+        if (!isCollidingWithGround) {
+            speed += acceleration * Time.deltaTime;
+        }
 
         // Apply velocity towards the player
         rb.velocity = direction * speed;

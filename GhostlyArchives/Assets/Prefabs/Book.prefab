@@ -79,7 +79,8 @@ MonoBehaviour:
   acceleration: 20
   launchForce: 8
   oomph: 0.8
-  launchDistanceThreshold: 2
+  launchDistanceThreshold: 1
+  isMoving: 0
 --- !u!61 &2394017314771327740
 BoxCollider2D:
   m_ObjectHideFlags: 0

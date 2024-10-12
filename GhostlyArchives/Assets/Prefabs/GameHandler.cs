@@ -108,7 +108,7 @@ public class GameHandler : MonoBehaviour {
         if (currHealth.health == 0) {
             GameOverScene();
         } else {
-            healthTextTemp.text = "HEALTH: " + currHealth.health;
+            healthTextTemp.text = "Health: " + currHealth.health;
         }
     }
 

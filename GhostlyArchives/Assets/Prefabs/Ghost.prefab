@@ -161,7 +161,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   jumpForce: 10
-  health: 4
+  health: 5
   spriteRenderer: {fileID: 7603271500873003411}
 --- !u!95 &7908095843322541081
 Animator:
