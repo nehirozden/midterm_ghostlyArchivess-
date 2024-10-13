@@ -26,6 +26,12 @@ public class SelectBook : MonoBehaviour
 
     void Update()
     {
+        if (hasBook) {
+            spriteRenderer.sprite = full_bookshelf;
+        }
+        else {
+            spriteRenderer.sprite = empty_bookshelf;
+        }
 
         // Selection script
         if (Input.GetButtonDown("Select")) {

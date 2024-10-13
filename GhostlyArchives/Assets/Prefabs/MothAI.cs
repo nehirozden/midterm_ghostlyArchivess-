@@ -22,6 +22,7 @@ public class MothAI : MonoBehaviour
 
     void Start()
     {
+        
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>(); 
 
         rb = GetComponent<Rigidbody2D>();
@@ -37,10 +38,23 @@ public class MothAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        Vector2 direction = (target.position - transform.position).normalized;
         if (Vector2.Distance(transform.position, target.position) > StopChase) {
             transform.position = Vector2.MoveTowards(transform.position, target.position, Speed * Time.deltaTime);
+
+            RotateTowards(direction);
         }
 
+    }
+
+    private void RotateTowards(Vector2 direction)
+    {
+        // Calculate the angle based on the direction
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+        // Set the rotation of the moth
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90)); // Adjust -90 if your sprite's forward is up
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

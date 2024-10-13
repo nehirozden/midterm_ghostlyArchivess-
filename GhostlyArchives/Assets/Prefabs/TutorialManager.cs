@@ -27,6 +27,7 @@ public class TutorialManager : MonoBehaviour
             tutorialMessages.Enqueue("Click a book to select it");
             tutorialMessages.Enqueue("Hold Q or right click to pull it");
             tutorialMessages.Enqueue("Let go when it's close to launch the book!");
+            tutorialMessages.Enqueue("Not going far enough? Try giving it a little oomph...");
             tutorialMessages.Enqueue("Now try to shelve all the books.");
 
         }

@@ -134,7 +134,7 @@ MonoBehaviour:
   StopChase: 0.3
   player: {fileID: 4203547496114318787, guid: 9795d04a5b1ba674bb879f888d933e85, type: 3}
   mothPrefab: {fileID: 377564802414699596}
-  requiredVelocity: 10
+  requiredVelocity: 9
 --- !u!61 &8358505553020896143
 BoxCollider2D:
   m_ObjectHideFlags: 0
