@@ -71,6 +71,17 @@ public class GameHandler : MonoBehaviour {
                 }
             }
         }
+
+        // Check if the current scene is the final scene
+        if (currentSceneName == "FinalScene")
+        {
+            // Listen for space bar press
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                // Load the end scene when space bar is pressed
+                SceneManager.LoadScene("EndScene");
+            }
+        }
         
         // Checks if the Escape key is pressed
         if (Input.GetKeyDown(KeyCode.Escape)){
