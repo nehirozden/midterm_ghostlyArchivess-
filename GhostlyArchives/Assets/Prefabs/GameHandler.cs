@@ -79,7 +79,7 @@ public class GameHandler : MonoBehaviour {
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 // Load the end scene when space bar is pressed
-                SceneManager.LoadScene("EndScene");
+                SceneManager.LoadScene("StartScene");
             }
         }
         

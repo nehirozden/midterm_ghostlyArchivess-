@@ -37,6 +37,7 @@ public class BookController : MonoBehaviour
 
     void Update()
     {
+        GetComponent<Collider2D>().enabled = true;
         // Selection code 
       
         if (Input.GetButtonDown("Select")) {
@@ -54,6 +55,7 @@ public class BookController : MonoBehaviour
                 if (Vector2.Distance(transform.position, player.transform.position) <= launchDistanceThreshold)
                 {
                     transform.position = player.transform.position;
+                    GetComponent<Collider2D>().enabled = false;
                 }
                 else {
                     // Move the book if m1 is held down
@@ -74,6 +76,7 @@ public class BookController : MonoBehaviour
         // Release the key
         else if (Input.GetButtonUp("Pull"))
         {
+            GetComponent<Collider2D>().enabled = true;
             if (isSelected) {
 
                 // Check the distance to the player
