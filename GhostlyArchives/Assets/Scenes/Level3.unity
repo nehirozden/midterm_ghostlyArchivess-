@@ -810,6 +810,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2411995053492466603, guid: 4262c7ecbf8fe468f9830b9067a39e23, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4002688700766055289, guid: 4262c7ecbf8fe468f9830b9067a39e23, type: 3}
       propertyPath: m_Name
       value: GameObjectCanvas
